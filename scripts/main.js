@@ -1,10 +1,6 @@
 const list = document.getElementById("pokemon-list")
 const offset = 0;
-const limit = 10;
-
-function convertPokemonTypesToLi (pokemonTypes) {
-    return pokemonTypes.map((typeSlot) => `<li class="type">${typeSlot.type.name}</li>`)
-}
+const limit = 100;
 
 function captalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
@@ -21,17 +17,17 @@ function fixDisplayPokemonNumber (number) {
 
 function convertPokemonToLi (pokemon) {
     return `
-        <li class="pokemon">
-            <span class="number">#${fixDisplayPokemonNumber(pokemon.order)}</span>
+        <li class="pokemon ${pokemon.type}">
+            <span class="number">#${fixDisplayPokemonNumber(pokemon.number)}</span>
             <span class="name">${captalizeFirstLetter(pokemon.name)}</span>
 
             <div class="detail">
                 <ol class="types">
-                    ${convertPokemonTypesToLi(pokemon.types).join('')}
+                    ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
                 </ol>
 
                 <img 
-                    src="${pokemon.sprites.other.dream_world.front_default}" 
+                    src="${pokemon.photo}" 
                     alt="${captalizeFirstLetter(pokemon.name)}"
                 >
             </div>
